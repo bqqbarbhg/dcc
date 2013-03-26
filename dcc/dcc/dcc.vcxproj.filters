@@ -14,4 +14,24 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dcc\pre\token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\source_range.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\pre\preprocessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\front\token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\front\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
