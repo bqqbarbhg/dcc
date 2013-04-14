@@ -84,6 +84,7 @@
     <ClInclude Include="dcc\pre\scanner.h" />
     <ClInclude Include="dcc\pre\token.h" />
     <ClInclude Include="dcc\source_range.h" />
+    <ClInclude Include="dcc\unicode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dcc\file.cpp" />

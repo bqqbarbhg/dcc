@@ -69,6 +69,9 @@
     <ClInclude Include="dcc\out\output\windows_output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dcc\unicode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dcc\pre\scanner.cpp">

@@ -1,6 +1,7 @@
 #include "clang_console.h"
 
 #include <iostream>
+#include <dcc/unicode.h>
 
 namespace dcc { namespace out {
 
@@ -24,7 +25,7 @@ void ClangConsole::write(const char *s, unsigned int n)
 			std::cout << std::endl;
 		} else {
 			line += *s;
-			if (mode != NORMAL || !under.empty()) {
+			if ((mode != NORMAL || !under.empty()) && !is_utf8_continuation_byte(*s)) {
 				switch (mode) {
 				case NORMAL: under += ' '; break;
 				case MEDIUM: under += '~'; break;
