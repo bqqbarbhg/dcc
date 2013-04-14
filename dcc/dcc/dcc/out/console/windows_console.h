@@ -6,20 +6,16 @@
 
 #include <Windows.h>
 
-#include <dcc/out/output.h>
+#include <dcc/out/console.h>
 
 namespace dcc { namespace out {
 
 // Windows console API highlighting
-class WindowsConsole : public Output
+class WindowsConsole : public Console
 {
 public:
-	WindowsConsole();
-	virtual ~WindowsConsole();
+	WindowsConsole(Output& out);
 	virtual void set_type(TextType type);
-	virtual void write_string(const char * s);
-	virtual void write(const char *s, unsigned int n);
-	virtual void flush();
 
 private:
 	HANDLE handle;

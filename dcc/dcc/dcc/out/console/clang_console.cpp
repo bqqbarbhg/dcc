@@ -14,10 +14,6 @@ void ClangConsole::set_type(TextType type)
 		under = std::string(line.length(), ' ');
 	mode = type;
 }
-void ClangConsole::write_string(const char * s)
-{
-	write(s, strlen(s));
-}
 void ClangConsole::write(const char *s, unsigned int n)
 {
 	const char *e = s + n;
@@ -41,9 +37,12 @@ void ClangConsole::write(const char *s, unsigned int n)
 void ClangConsole::flush()
 {
 	if (!line.empty())
-		std::cout << line;
+		output.write(&line[0], line.length());
 	if (!under.empty())
-		std::cout << std::endl << under;
+	{
+		output.write("\n", 1);
+		output.write(&under[0], under.length());
+	}
 	line.clear(); under.clear();
 }
 

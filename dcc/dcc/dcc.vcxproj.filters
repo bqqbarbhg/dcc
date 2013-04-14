@@ -42,22 +42,31 @@
     <ClInclude Include="dcc\io.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dcc\out\output.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dcc\out\windows_console.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dcc\platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dcc\out\plain_console.h">
+    <ClInclude Include="dcc\out\output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dcc\out\clang_console.h">
+    <ClInclude Include="dcc\out\console\ansi_color_console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dcc\out\ansi_color_console.h">
+    <ClInclude Include="dcc\out\console\clang_console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\out\console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\out\console\plain_console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\out\console\windows_console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\out\output\standard_output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dcc\out\output\windows_output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,19 +86,25 @@
     <ClCompile Include="dcc\io.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dcc\out\windows_console.cpp">
+    <ClCompile Include="dcc\out\console\ansi_color_console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dcc\out\output.cpp">
+    <ClCompile Include="dcc\out\console\clang_console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dcc\out\plain_console.cpp">
+    <ClCompile Include="dcc\out\console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dcc\out\clang_console.cpp">
+    <ClCompile Include="dcc\out\console\plain_console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dcc\out\ansi_color_console.cpp">
+    <ClCompile Include="dcc\out\console\windows_console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dcc\out\output\standard_output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dcc\out\output\windows_output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

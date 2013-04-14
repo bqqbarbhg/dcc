@@ -3,7 +3,8 @@
 #include <dcc/file.h>
 #include <dcc/pre/scanner.h>
 #include <dcc/source_range.h>
-#include <dcc/out/windows_console.h>
+#include <dcc/out/output/windows_output.h>
+#include <dcc/out/console/clang_console.h>
 
 int main(int argc, char** argv)
 {
@@ -12,15 +13,14 @@ int main(int argc, char** argv)
 	char c;
 	while (c = scanner.get())
 		;
-	dcc::SourceRange range(file, 28, 36);
+	dcc::SourceRange range(file, 28, 80);
 	dcc::SourceRange inner(file, 28, 29);
 
-	dcc::out::WindowsConsole winout;
+	dcc::out::WindowsOutput winout;
+	dcc::out::ClangConsole console(winout);
 
-	range.print(winout);
-	winout.write_string("\n");
-	range.print_long(winout, inner);
-	winout.write_string("\n");
-
-	getchar();
+	range.print(console);
+	console.write_string("\n");
+	range.print_long(console, inner);
+	console.write_string("\n");
 }

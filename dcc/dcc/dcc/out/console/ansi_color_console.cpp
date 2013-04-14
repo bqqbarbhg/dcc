@@ -18,13 +18,5 @@ void AnsiColorConsole::set_type(TextType type)
 		break;
 	}
 }
-void AnsiColorConsole::write_string(const char * s)
-{
-	std::cout << s;
-}
-void AnsiColorConsole::write(const char *s, unsigned int n)
-{
-	std::cout.write(s, n);
-}
 
 } }

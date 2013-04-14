@@ -18,14 +18,14 @@ void detab(const std::string& str, std::ostream& o, std::vector<src_charpos_t>& 
 	auto c = cols.begin(), e = cols.end();
 	src_charpos_t pos = 0;
 	for (auto ch = str.begin(); ch != str.end(); ++ch) {
-		char cc;
-		if ((cc = *ch) == '\t')
+		char cc = *ch;
+		if (cc == '\t')
 		{
 			o << "    ", pos += 4;
 			for (auto q = c; q != e; ++q)
 				*q += 3;
-		}
-		else
+		}	
+		else if (cc != '\r')
 			o << cc, pos++;
 		while (c != e && pos > *c)
 			c++;

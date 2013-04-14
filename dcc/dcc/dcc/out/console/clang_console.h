@@ -1,19 +1,20 @@
 #ifndef _DCC_OUT_CLANG_CONSOLE_H
 #define _DCC_OUT_CLANG_CONSOLE_H
 
-#include <dcc/out/output.h>
+#include <dcc/out/console.h>
 
 namespace dcc { namespace out {
 
 // A Clang error diagnostics type console with ascii underlining
-class ClangConsole : public Output
+class ClangConsole : public Console
 {
 public:
+	ClangConsole(Output& out)
+		: Console(out) { }
 	~ClangConsole();
 	virtual void set_type(TextType type);
-	virtual void write_string(const char * s);
 	virtual void write(const char *s, unsigned int n);
-	virtual void flush();
+	void flush();
 private:
 	std::string line, under;
 	TextType mode;

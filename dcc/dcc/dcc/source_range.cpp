@@ -12,81 +12,79 @@ SourceRange::SourceRange(File &f, src_charpos_t b, src_charpos_t e)
 {
 }
 
-void SourceRange::print(out::Output& o) const
+void SourceRange::print(out::Console& o) const
 {
 	auto p = file.get_line(begin);
 	auto q = file.get_line(end);
 	o << file.name << ": (" << p->second << ":" << begin - p->first << " - " << q->second << ":" << end - q->first << ")";
 }
 
-void SourceRange::print_long(out::Output& o) const
+void SourceRange::print_long(out::Console& o) const
 {
 	auto beginline = file.get_line(begin);
 	auto endline = file.get_line(end);
 	auto in = file.open();
-	if (beginline->second == endline->second) {
-		auto nextline = std::next(endline);
-		src_charpos_t len = nextline->first - beginline->first;
-		
-		// Read the relevant line
-		std::string str; str.resize(len);
-		in.seekg(beginline->first, std::ios::beg);
-		in.read(&str[0], len);
 
-		// Store the begin and end columns
-		std::vector<src_charpos_t> cols;
-		cols.push_back(begin - beginline->first);
-		cols.push_back(end - beginline->first);
-
-		// Detab and print the line
-		std::ostringstream oss;
-		io::detab(str, oss, cols);
-		std::string st = oss.str();
+	auto nextline = std::next(endline);
+	src_charpos_t len = nextline->first - beginline->first;
 		
-		o.write(&st[0], cols[0]);
-		o.set_type(out::IMPORTANT);
-		o.write(&st[cols[0]], cols[1] - cols[0]);
-		o.set_type(out::NORMAL);
-		o.write_string(&st[cols[1]]);
-	}
+	// Read the relevant line
+	std::string str; str.resize(len);
+	in.seekg(beginline->first, std::ios::beg);
+	in.read(&str[0], len);
+
+	// Store the begin and end columns
+	std::vector<src_charpos_t> cols;
+	cols.push_back(begin - beginline->first);
+	cols.push_back(end - beginline->first);
+
+	// Detab and print the line
+	std::ostringstream oss;
+	io::detab(str, oss, cols);
+	std::string st = oss.str();
+		
+	o.write(&st[0], cols[0]);
+	o.set_type(out::IMPORTANT);
+	o.write(&st[cols[0]], cols[1] - cols[0]);
+	o.set_type(out::NORMAL);
+	o.write_string(&st[cols[1]]);
 }
 
-void SourceRange::print_long(out::Output& o, const SourceRange& inner) const
+void SourceRange::print_long(out::Console& o, const SourceRange& inner) const
 {
 	auto beginline = file.get_line(begin);
 	auto endline = file.get_line(end);
 	auto in = file.open();
-	if (beginline->second == endline->second) {
-		auto nextline = std::next(endline);
-		src_charpos_t len = nextline->first - beginline->first;
-		
-		// Read the relevant line
-		std::string str; str.resize(len);
-		in.seekg(beginline->first, std::ios::beg);
-		in.read(&str[0], len);
 
-		// Store the begin and end columns
-		std::vector<src_charpos_t> cols;
-		cols.push_back(begin - beginline->first);
-		cols.push_back(inner.begin - beginline->first);
-		cols.push_back(inner.end - beginline->first);
-		cols.push_back(end - beginline->first);
-
-		// Detab and print the line
-		std::ostringstream oss;
-		io::detab(str, oss, cols);
-		std::string st = oss.str();
+	auto nextline = std::next(endline);
+	src_charpos_t len = nextline->first - beginline->first;
 		
-		o.write(&st[0], cols[0]);
-		o.set_type(out::MEDIUM);
-		o.write(&st[cols[0]], cols[1] - cols[0]);
-		o.set_type(out::IMPORTANT);
-		o.write(&st[cols[1]], cols[2] - cols[1]);
-		o.set_type(out::MEDIUM);
-		o.write(&st[cols[2]], cols[3] - cols[2]);
-		o.set_type(out::NORMAL);
-		o.write_string(&st[cols[3]]);
-	}
+	// Read the relevant line
+	std::string str; str.resize(len);
+	in.seekg(beginline->first, std::ios::beg);
+	in.read(&str[0], len);
+
+	// Store the begin and end columns
+	std::vector<src_charpos_t> cols;
+	cols.push_back(begin - beginline->first);
+	cols.push_back(inner.begin - beginline->first);
+	cols.push_back(inner.end - beginline->first);
+	cols.push_back(end - beginline->first);
+
+	// Detab and print the line
+	std::ostringstream oss;
+	io::detab(str, oss, cols);
+	std::string st = oss.str();
+		
+	o.write(&st[0], cols[0]);
+	o.set_type(out::MEDIUM);
+	o.write(&st[cols[0]], cols[1] - cols[0]);
+	o.set_type(out::IMPORTANT);
+	o.write(&st[cols[1]], cols[2] - cols[1]);
+	o.set_type(out::MEDIUM);
+	o.write(&st[cols[2]], cols[3] - cols[2]);
+	o.set_type(out::NORMAL);
+	o.write_string(&st[cols[3]]);
 }
 
 }

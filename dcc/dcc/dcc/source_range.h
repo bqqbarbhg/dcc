@@ -4,7 +4,7 @@
 #include <iosfwd>
 #include <string>
 #include <dcc/file.h>
-#include <dcc/out/output.h>
+#include <dcc/out/console.h>
 
 namespace dcc {
 
@@ -26,17 +26,17 @@ public:
 	src_charpos_t end;
 
 	// Prints the short form of the range ie. 'file:row:col'
-	void print(out::Output& out) const;
+	void print(out::Console& out) const;
 
 	// Prints the long form of the range (if enabled) eg.
 	// int main(int argc, char** argv)
 	//                    ^^^^^^
-	void print_long(out::Output& out) const;
+	void print_long(out::Console& out) const;
 
 	// Prints the long form of the range with a inner subrange (if enabled) eg.
 	// int main(int argc, char** argv)
 	//                    ~~~~^^
-	void print_long(out::Output& out, const SourceRange& inner) const;
+	void print_long(out::Console& out, const SourceRange& inner) const;
 };
 
 }

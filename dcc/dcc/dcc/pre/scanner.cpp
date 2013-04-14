@@ -10,11 +10,14 @@ Scanner::Scanner(File& file)
 
 char Scanner::get()
 {
-	if (in.eof())
+	charpos++;
+	if (in.eof()) {
+		file.line_changes[charpos] = ++linenum + 1;
 		return 0;
+	}
 
 	auto i = in.get();
-	charpos++;
+	
 	if (i == '\n')
 		file.line_changes[charpos] = ++linenum + 1;
 	
