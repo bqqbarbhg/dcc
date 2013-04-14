@@ -1,0 +1,13 @@
+#ifndef _DCC_PLATFORM_H
+#define _DCC_PLATFORM_H
+
+#define DCC_PLATFORM_WINDOWS 1
+#define DCC_PLATFORM_UNIX 2
+
+#ifdef _WIN32
+#define DCC_PLATFORM DCC_PLATFORM_WINDOWS
+#else
+#define DCC_PLATFORM DCC_PLATFORM_UNIX
+#endif
+
+#endif

@@ -69,9 +69,33 @@
     <ClInclude Include="dcc\file.h" />
     <ClInclude Include="dcc\front\parser.h" />
     <ClInclude Include="dcc\front\token.h" />
+    <ClInclude Include="dcc\io.h" />
+    <ClInclude Include="dcc\io\buffered_reader.h" />
+    <ClInclude Include="dcc\out\ansi_color_console.h" />
+    <ClInclude Include="dcc\out\clang_console.h" />
+    <ClInclude Include="dcc\out\output.h" />
+    <ClInclude Include="dcc\out\plain_console.h" />
+    <ClInclude Include="dcc\out\windows_console.h" />
+    <ClInclude Include="dcc\platform.h" />
     <ClInclude Include="dcc\pre\preprocessor.h" />
+    <ClInclude Include="dcc\pre\scanner.h" />
     <ClInclude Include="dcc\pre\token.h" />
     <ClInclude Include="dcc\source_range.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dcc\file.cpp" />
+    <ClCompile Include="dcc\io.cpp" />
+    <ClCompile Include="dcc\out\ansi_color_console.cpp" />
+    <ClCompile Include="dcc\out\clang_console.cpp" />
+    <ClCompile Include="dcc\out\output.cpp" />
+    <ClCompile Include="dcc\out\plain_console.cpp" />
+    <ClCompile Include="dcc\out\windows_console.cpp" />
+    <ClCompile Include="dcc\pre\scanner.cpp" />
+    <ClCompile Include="dcc\source_range.cpp" />
+    <ClCompile Include="test\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test\test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
