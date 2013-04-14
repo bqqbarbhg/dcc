@@ -10,6 +10,7 @@
 
 namespace dcc { namespace out {
 
+// Windows console API highlighting
 class WindowsConsole : public Output
 {
 public:

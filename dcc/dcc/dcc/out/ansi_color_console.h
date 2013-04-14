@@ -5,6 +5,8 @@
 
 namespace dcc { namespace out {
 
+// ANSI color codes
+// Doesn't work on windows terminal
 class AnsiColorConsole : public Output
 {
 public:

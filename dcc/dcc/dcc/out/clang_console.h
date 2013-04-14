@@ -5,6 +5,7 @@
 
 namespace dcc { namespace out {
 
+// A Clang error diagnostics type console with ascii underlining
 class ClangConsole : public Output
 {
 public:

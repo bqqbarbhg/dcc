@@ -5,6 +5,7 @@
 
 namespace dcc { namespace out {
 
+// Plain console with no text highlighting
 class PlainConsole : public Output
 {
 public:
