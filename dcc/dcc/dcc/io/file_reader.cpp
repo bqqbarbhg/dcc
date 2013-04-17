@@ -1,14 +1,14 @@
-#include "scanner.h"
+#include "file_reader.h"
 
-namespace dcc { namespace pre {
+namespace dcc { namespace io {
 
-Scanner::Scanner(File& file)
+FileReader::FileReader(File& file)
 	: file(file), in(file.open()), charpos(0), linenum(0)
 {
 	file.line_changes[0] = 1;
 }
 
-char Scanner::get()
+char FileReader::get()
 {
 	charpos++;
 	if (in.eof()) {

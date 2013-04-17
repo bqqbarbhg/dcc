@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <dcc/file.h>
-#include <dcc/pre/scanner.h>
+#include <dcc/io/file_reader.h>
 #include <dcc/source_range.h>
 #include <dcc/out/output/windows_output.h>
 #include <dcc/out/console/clang_console.h>
@@ -9,9 +9,9 @@
 int main(int argc, char** argv)
 {
 	dcc::File file("test/test.txt");
-	dcc::pre::Scanner scanner(file);
+	dcc::io::FileReader reader(file);
 	char c;
-	while (c = scanner.get())
+	while (c = reader.get())
 		;
 	dcc::SourceRange range(file, 28, 80);
 	dcc::SourceRange inner(file, 28, 29);

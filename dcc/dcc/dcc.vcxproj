@@ -70,7 +70,6 @@
     <ClInclude Include="dcc\front\parser.h" />
     <ClInclude Include="dcc\front\token.h" />
     <ClInclude Include="dcc\io.h" />
-    <ClInclude Include="dcc\io\buffered_reader.h" />
     <ClInclude Include="dcc\out\console\ansi_color_console.h" />
     <ClInclude Include="dcc\out\console\clang_console.h" />
     <ClInclude Include="dcc\out\console.h" />
@@ -81,7 +80,7 @@
     <ClInclude Include="dcc\out\output\windows_output.h" />
     <ClInclude Include="dcc\platform.h" />
     <ClInclude Include="dcc\pre\preprocessor.h" />
-    <ClInclude Include="dcc\pre\scanner.h" />
+    <ClInclude Include="dcc\io\file_reader.h" />
     <ClInclude Include="dcc\pre\token.h" />
     <ClInclude Include="dcc\source_range.h" />
     <ClInclude Include="dcc\unicode.h" />
@@ -96,7 +95,7 @@
     <ClCompile Include="dcc\out\output\standard_output.cpp" />
     <ClCompile Include="dcc\out\console\windows_console.cpp" />
     <ClCompile Include="dcc\out\output\windows_output.cpp" />
-    <ClCompile Include="dcc\pre\scanner.cpp" />
+    <ClCompile Include="dcc\io\file_reader.cpp" />
     <ClCompile Include="dcc\source_range.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
