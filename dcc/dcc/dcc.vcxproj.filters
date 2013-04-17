@@ -69,6 +69,9 @@
     <ClInclude Include="dcc\io\file_reader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dcc\pre\char_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test\main.cpp">
@@ -105,6 +108,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dcc\io\file_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dcc\pre\char_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

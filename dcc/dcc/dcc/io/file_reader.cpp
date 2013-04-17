@@ -8,6 +8,13 @@ FileReader::FileReader(File& file)
 	file.line_changes[0] = 1;
 }
 
+void FileReader::unget()
+{
+	if (!in.eof())
+		in.unget();
+	charpos--;
+}
+
 char FileReader::get()
 {
 	charpos++;

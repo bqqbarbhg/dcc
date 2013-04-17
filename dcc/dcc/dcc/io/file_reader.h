@@ -16,6 +16,10 @@ public:
 	// Returns 0 on EOF
 	char get();
 
+	// Returns one read character back to the stream
+	// Next call to `get` returns the last `get` result
+	void unget();
+
 private:
 	src_charpos_t charpos;
 	src_line_t linenum;

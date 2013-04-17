@@ -79,6 +79,7 @@
     <ClInclude Include="dcc\out\console\windows_console.h" />
     <ClInclude Include="dcc\out\output\windows_output.h" />
     <ClInclude Include="dcc\platform.h" />
+    <ClInclude Include="dcc\pre\char_map.h" />
     <ClInclude Include="dcc\pre\preprocessor.h" />
     <ClInclude Include="dcc\io\file_reader.h" />
     <ClInclude Include="dcc\pre\token.h" />
@@ -96,6 +97,7 @@
     <ClCompile Include="dcc\out\console\windows_console.cpp" />
     <ClCompile Include="dcc\out\output\windows_output.cpp" />
     <ClCompile Include="dcc\io\file_reader.cpp" />
+    <ClCompile Include="dcc\pre\char_map.cpp" />
     <ClCompile Include="dcc\source_range.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
