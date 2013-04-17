@@ -33,7 +33,7 @@ StringMap::hash_t StringMap::get_hash(const char* str)
 {
 	// djb2 hashing algorithm
 
-	register hash_t hash = 5813;
+	register hash_t hash = 5381;
 	register char c;
 	while (c = *str++)
 		hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
