@@ -5,7 +5,7 @@ namespace dcc { namespace out {
 WindowsOutput::WindowsOutput()
 {
 	handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleCP(CP_UTF8);
+	SetConsoleOutputCP(CP_UTF8);
 }
 
 void WindowsOutput::write(const char* str, unsigned int n)
