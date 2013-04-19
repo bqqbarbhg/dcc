@@ -1,6 +1,8 @@
 #ifndef _DCC_STRING_MAP_H
 #define _DCC_STRING_MAP_H
 
+#include <dcc/enums.h>
+#include <dcc/string_ref.h>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -12,6 +14,7 @@ class StringMap
 public:
 	StringMap();
 	const char* insert(const char* str);
+	
 private:
 	typedef unsigned int hash_t;
 
@@ -39,11 +42,21 @@ private:
 	class Entry
 	{
 	public:
-		Entry()
-			: ptr(nullptr), next(nullptr) { }
 		const char* ptr;
-		std::unique_ptr<Entry> next;
+		unsigned int len;
+		unsigned int count;
+
+		Entry& swap(Entry& other);
 	};
+	class EntryList
+	{
+		std::vector<Entry> entries;
+	};
+	class BaseEntry : public Entry
+	{
+		std::unique_ptr<EntryList> entrylistptr;
+	};
+	
 
 	Entry& find(const char* ptr);
 

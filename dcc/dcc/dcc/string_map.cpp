@@ -5,20 +5,14 @@ namespace dcc {
 StringMap::StringMap()
 	: bucket_count(2048)
 {
-	pages.push_back(Page(512));
+	pages.push_back(Page(4096));
 	entries.reset(new Entry[bucket_count]);
 }
 
 StringMap::Entry& StringMap::find(const char* str)
 {
 	hash_t hash = get_hash(str);
-	Entry* e = entries.get() + hash;
-	while (e->ptr != nullptr) {
-		if (!strcmp(str, e->ptr))
-			return *e;
-		if (!e->next)
-			return e->next.reset(new Entry), *e->next;
-	}
+	
 	return *e;
 }
 

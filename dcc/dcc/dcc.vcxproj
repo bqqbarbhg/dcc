@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="dcc\enums.h" />
     <ClInclude Include="dcc\file.h" />
     <ClInclude Include="dcc\front\parser.h" />
     <ClInclude Include="dcc\front\token.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="dcc\io\file_reader.h" />
     <ClInclude Include="dcc\pre\token.h" />
     <ClInclude Include="dcc\source_range.h" />
+    <ClInclude Include="dcc\string_map.h" />
     <ClInclude Include="dcc\unicode.h" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +101,7 @@
     <ClCompile Include="dcc\io\file_reader.cpp" />
     <ClCompile Include="dcc\pre\char_map.cpp" />
     <ClCompile Include="dcc\source_range.cpp" />
+    <ClCompile Include="dcc\string_map.cpp" />
     <ClCompile Include="test\main.cpp" />
   </ItemGroup>
   <ItemGroup>
