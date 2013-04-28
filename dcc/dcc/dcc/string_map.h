@@ -22,17 +22,22 @@ private:
 	{
 	public:
 		Page(unsigned int size)
-			: size(size), pos(0), buffer(new char[size])
+			: size(size), pos(0), buffer(new char[size]), old(nullptr)
 		{
 		}
 		Page(Page&& p)
 			: buffer(std::move(p.buffer))
+			, old(std::move(p.old))
 			, pos(pos), size(size) { }
 		Page& operator=(Page&& p) {
 			buffer = std::move(p.buffer);
+			old = std::move(p.old);
 			pos = p.pos; size = p.size;
 		}
 		
+		const char* insert(const char* str, unsigned int len);
+
+		std::unique_ptr<Page> old;
 		std::unique_ptr<char[]> buffer;
 		unsigned int pos, size;
 	private:
@@ -50,22 +55,24 @@ private:
 	};
 	class EntryList
 	{
+	public:
 		std::vector<Entry> entries;
 	};
 	class BaseEntry : public Entry
 	{
+		public:
 		std::unique_ptr<EntryList> entrylistptr;
 	};
 	
 
-	Entry& find(const char* ptr);
+	Entry& find(const char* ptr, BaseEntry **base);
 
-	std::unique_ptr<Entry[]> entries;
+	std::unique_ptr<BaseEntry[]> entries;
 
-	hash_t get_hash(const char* str);
+	hash_t get_hash(const char* str, unsigned int *len);
 
 	unsigned int bucket_count;
-	std::vector<Page> pages;
+	Page page;
 };
 
 }

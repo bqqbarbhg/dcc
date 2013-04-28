@@ -1,5 +1,7 @@
 #include "char_map.h"
 
+#include <dcc/settings.h>
+
 namespace dcc { namespace pre {
 
 CharMap::CharMap(io::FileReader& in)
@@ -9,28 +11,32 @@ CharMap::CharMap(io::FileReader& in)
 
 char CharMap::trigraph()
 {
-	char c = in.get();
-	if (c == '?') {
-		c = in.get();
+	if (settings.trigraph) {
+		char c = in.get();
 		if (c == '?') {
 			c = in.get();
-			switch (c) {
-			case '=': return '#';
-			case '/': return '\\';
-			case '(': return '[';
-			case ')': return ']';
-			case '\'': return '^';
-			case '!': return '|';
-			case '<': return '{';
-			case '>': return '}';
-			case '-': return '~';
+			if (c == '?') {
+				c = in.get();
+				switch (c) {
+				case '=': return '#';
+				case '/': return '\\';
+				case '(': return '[';
+				case ')': return ']';
+				case '\'': return '^';
+				case '!': return '|';
+				case '<': return '{';
+				case '>': return '}';
+				case '-': return '~';
+				}
+				in.unget();
 			}
 			in.unget();
+			return '?';
+		} else {
+			return c;
 		}
-		in.unget();
-		return '?';
 	} else {
-		return c;
+		return in.get();
 	}
 }
 
