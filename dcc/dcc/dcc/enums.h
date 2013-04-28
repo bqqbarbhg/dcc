@@ -10,6 +10,7 @@ enum TokenType
 	WHITESPACE     = 0x0001,
 	IDENTIFIER     = 0x0002,
 	NUMBER         = 0x0003,
+	END_OF_FILE    = 0x0004,
 
 	// 0x1XXX Operators
 	OPERATOR       = 0x1000,

@@ -1,5 +1,5 @@
-#ifndef _DCC_PRE_SCANNER_H
-#define _DCC_PRE_SCANNER_H
+#ifndef _DCC_IO_FILE_READER_H
+#define _DCC_IO_FILE_READER_H
 
 #include <fstream>
 #include <dcc/file.h>

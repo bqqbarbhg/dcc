@@ -3,13 +3,19 @@
 
 namespace dcc {
 
-class StringRef
+// Reference to a string
+// Comparing equality is O(1)
+typedef const char* StringRef;
+/*class StringRef
 {
 public:
-	
+	StringRef(const char* p)
+		: ptr(p) { }
+
+	operator const char*() const { return ptr; }
 private:
 	const char* ptr;
-};
+};*/
 
 }
 

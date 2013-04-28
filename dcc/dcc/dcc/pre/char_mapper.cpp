@@ -1,15 +1,15 @@
-#include "char_map.h"
+#include "char_mapper.h"
 
 #include <dcc/settings.h>
 
 namespace dcc { namespace pre {
 
-CharMap::CharMap(io::FileReader& in)
+CharMapper::CharMapper(io::FileReader& in)
 	: ls_has_unget(false), in(in)
 {
 }
 
-char CharMap::trigraph()
+char CharMapper::trigraph()
 {
 	if (settings.trigraph) {
 		char c = in.get();
@@ -40,7 +40,7 @@ char CharMap::trigraph()
 	}
 }
 
-char CharMap::linesplice()
+char CharMapper::linesplice()
 {
 	if (ls_has_unget) {
 		ls_has_unget = false;
@@ -61,7 +61,7 @@ char CharMap::linesplice()
 	}
 }
 
-char CharMap::get()
+char CharMapper::get()
 {
 	return linesplice();
 }

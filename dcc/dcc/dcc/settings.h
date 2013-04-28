@@ -38,11 +38,14 @@ class Settings
 public:
 	Settings()
 		: trigraph("trigraph", false, true)
+		, unicode("unicode", false, false)
 	{
 	}
 
 	static std::unordered_map<std::string, SettingBase*> setting_map;
+
 	Setting<bool> trigraph;
+	Setting<bool> unicode;
 };
 extern Settings settings;
 

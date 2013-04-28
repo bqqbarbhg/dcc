@@ -6,10 +6,10 @@
 namespace dcc { namespace pre {
 
 // Processes translation phases 1 and 2 ($2.1.1.2)
-class CharMap
+class CharMapper
 {
 public:
-	CharMap(io::FileReader& in);
+	CharMapper(io::FileReader& in);
 
 	// Reads a character from the file and applies trigraph replacement and
 	// removes newlines followed by backslashes
