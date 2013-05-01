@@ -44,7 +44,10 @@ public:
 
 	static std::unordered_map<std::string, SettingBase*> setting_map;
 
+	// Replace trigraph sequences ($2.2.1.1)
 	Setting<bool> trigraph;
+
+	// Support UTF-8 identifiers
 	Setting<bool> unicode;
 };
 extern Settings settings;

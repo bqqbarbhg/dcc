@@ -5,6 +5,7 @@ namespace dcc { namespace front {
 
 class Token
 {
+	Token() { }
 };
 
 } }

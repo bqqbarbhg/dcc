@@ -1,13 +1,18 @@
 #include "scanner.h"
 #include <dcc/settings.h>
 #include <dcc/unicode.h>
+#include <dcc/io/file_reader.h>
 
 namespace dcc { namespace pre {
 
-Scanner::Scanner(CharMapper& chmapper, StringMap& strmap)
-	: char_mapper(chmapper)
+Scanner::Scanner(File& file, StringMap& strmap)
+	: file(file)
+	, file_reader(file)
+	, char_mapper(file_reader)
+	, char_pos(file_reader.get_char_index())
 	, string_map(strmap)
 {
+	// Create the keyword lsit
 	static struct {
 		const char* str;
 		TokenType tok;
@@ -30,9 +35,29 @@ Scanner::Scanner(CharMapper& chmapper, StringMap& strmap)
 	}
 }
 
+void Scanner::output_token(TokenType type)
+{
+	token.type = type;
+	token.str = string_map.insert(buffer.c_str());
+	
+	src_charpos_t next_char_pos = file_reader.get_char_index();
+	token.range = SourceRange(&file, char_pos, next_char_pos);
+	char_pos = next_char_pos;
+
+	buffer.clear();
+}
+
+char Scanner::get()
+{
+	char c = char_mapper.get();
+	buffer += c;
+	return c;
+}
+
 void Scanner::advance()
 {
-
+	while (get()) ;
+	output_token(IDENTIFIER);
 }
 
 } }

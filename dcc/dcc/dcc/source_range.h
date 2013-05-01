@@ -13,11 +13,12 @@ namespace dcc {
 class SourceRange
 {
 public:
-	SourceRange(File &f, src_charpos_t b, src_charpos_t e);
+	SourceRange() : file(nullptr) { }
+	SourceRange(const File *f, src_charpos_t b, src_charpos_t e);
 
 	// File where the range is in
 	// Must outlive this range
-	File &file;
+	const dcc::File *file;
 
 	// First character in the range (inclusive)
 	src_charpos_t begin;

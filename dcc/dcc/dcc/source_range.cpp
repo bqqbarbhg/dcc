@@ -4,26 +4,31 @@
 #include <sstream>
 #include <algorithm>
 #include <dcc/io.h>
+#include <dcc/assert.h>
 
 namespace dcc {
 
-SourceRange::SourceRange(File &f, src_charpos_t b, src_charpos_t e)
+SourceRange::SourceRange(const File *f, src_charpos_t b, src_charpos_t e)
 	: file(f), begin(b), end(e)
 {
 }
 
 void SourceRange::print(out::Console& o) const
 {
-	auto p = file.get_line(begin);
-	auto q = file.get_line(end);
-	o << file.name << ": (" << p->second << ":" << begin - p->first << " - " << q->second << ":" << end - q->first << ")";
+	DCC_ASSERT(file != nullptr);
+
+	auto p = file->get_line(begin);
+	auto q = file->get_line(end);
+	o << file->name << ": (" << p->second << ":" << begin - p->first << " - " << q->second << ":" << end - q->first << ")";
 }
 
 void SourceRange::print_long(out::Console& o) const
 {
-	auto beginline = file.get_line(begin);
-	auto endline = file.get_line(end);
-	auto in = file.open();
+	DCC_ASSERT(file != nullptr);
+
+	auto beginline = file->get_line(begin);
+	auto endline = file->get_line(end);
+	auto in = file->open();
 
 	auto nextline = std::next(endline);
 	src_charpos_t len = nextline->first - beginline->first;
@@ -52,9 +57,11 @@ void SourceRange::print_long(out::Console& o) const
 
 void SourceRange::print_long(out::Console& o, const SourceRange& inner) const
 {
-	auto beginline = file.get_line(begin);
-	auto endline = file.get_line(end);
-	auto in = file.open();
+	DCC_ASSERT(file != nullptr);
+
+	auto beginline = file->get_line(begin);
+	auto endline = file->get_line(end);
+	auto in = file->open();
 
 	auto nextline = std::next(endline);
 	src_charpos_t len = nextline->first - beginline->first;

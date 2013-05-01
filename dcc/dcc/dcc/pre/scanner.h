@@ -13,15 +13,28 @@ namespace dcc { namespace pre {
 class Scanner
 {
 public:
-	Scanner(CharMapper& chmapper, StringMap& strmap);
+	Scanner(File& file, StringMap& strmap);
 
+	// Scans one token and updates `token` field
 	void advance();
 
+	// The current token
 	Token token;
-
 private:
+	// Update `token`
+	void output_token(TokenType type);
+
+	// Get one character from the reader
+	char get();
+	
+	std::string buffer;
 	std::unordered_map<StringRef, TokenType> keywords;
-	CharMapper& char_mapper;
+
+	dcc::File file;
+	dcc::io::FileReader file_reader;
+	dcc::pre::CharMapper char_mapper;
+
+	src_charpos_t char_pos;
 	StringMap& string_map;
 };
 

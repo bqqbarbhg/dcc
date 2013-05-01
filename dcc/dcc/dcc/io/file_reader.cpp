@@ -2,6 +2,14 @@
 
 namespace dcc { namespace io {
 
+FileReader::FileReader(FileReader&& reader)
+	: file(reader.file)
+	, in(std::move(reader.in))
+	, charpos(reader.charpos)
+	, linenum(reader.linenum)
+{
+}
+
 FileReader::FileReader(File& file)
 	: file(file), in(file.open()), charpos(0), linenum(0)
 {

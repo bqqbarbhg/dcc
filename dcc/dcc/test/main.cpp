@@ -13,8 +13,8 @@ int main(int argc, char** argv)
 	char c;
 	while (c = reader.get())
 		;
-	dcc::SourceRange range(file, 28, 80);
-	dcc::SourceRange inner(file, 28, 29);
+	dcc::SourceRange range(&file, 28, 80);
+	dcc::SourceRange inner(&file, 28, 29);
 
 	dcc::out::StandardOutput winout;
 	dcc::out::AnsiColorConsole console(winout);

@@ -9,6 +9,8 @@ namespace dcc { namespace io {
 class FileReader
 {
 public:
+	FileReader(FileReader&& reader);
+
 	FileReader(File& file);
 
 	// Reads a sinlge character from the file
@@ -20,10 +22,13 @@ public:
 	// Next call to `get` returns the last `get` result
 	void unget();
 
+	// Returns the index of the current character in the file
+	src_charpos_t get_char_index() const { return charpos; }
+
 private:
+	File& file;
 	src_charpos_t charpos;
 	src_line_t linenum;
-	File& file;
 	std::ifstream in;
 };
 

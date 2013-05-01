@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="dcc\assert.h" />
     <ClInclude Include="dcc\enums.h" />
     <ClInclude Include="dcc\file.h" />
     <ClInclude Include="dcc\front\parser.h" />
@@ -80,9 +81,10 @@
     <ClInclude Include="dcc\out\console\windows_console.h" />
     <ClInclude Include="dcc\out\output\windows_output.h" />
     <ClInclude Include="dcc\platform.h" />
-    <ClInclude Include="dcc\pre\char_map.h" />
+    <ClInclude Include="dcc\pre\char_mapper.h" />
     <ClInclude Include="dcc\pre\preprocessor.h" />
     <ClInclude Include="dcc\io\file_reader.h" />
+    <ClInclude Include="dcc\pre\scanner.h" />
     <ClInclude Include="dcc\pre\token.h" />
     <ClInclude Include="dcc\settings.h" />
     <ClInclude Include="dcc\source_range.h" />
@@ -91,6 +93,7 @@
     <ClInclude Include="dcc\unicode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dcc\assert.cpp" />
     <ClCompile Include="dcc\file.cpp" />
     <ClCompile Include="dcc\io.cpp" />
     <ClCompile Include="dcc\out\console\ansi_color_console.cpp" />
@@ -101,7 +104,9 @@
     <ClCompile Include="dcc\out\console\windows_console.cpp" />
     <ClCompile Include="dcc\out\output\windows_output.cpp" />
     <ClCompile Include="dcc\io\file_reader.cpp" />
-    <ClCompile Include="dcc\pre\char_map.cpp" />
+    <ClCompile Include="dcc\pre\char_mapper.cpp" />
+    <ClCompile Include="dcc\pre\preprocessor.cpp" />
+    <ClCompile Include="dcc\pre\scanner.cpp" />
     <ClCompile Include="dcc\settings.cpp" />
     <ClCompile Include="dcc\source_range.cpp" />
     <ClCompile Include="dcc\string_map.cpp" />

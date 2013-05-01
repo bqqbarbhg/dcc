@@ -16,7 +16,6 @@ public:
 private:
 	const char* ptr;
 };*/
-
 }
 
 #endif
