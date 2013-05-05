@@ -43,6 +43,7 @@ public:
 	Console& operator<<(TextType text);
 	Console& operator<<(unsigned long l);
 	Console& operator<<(long l);
+	Console& operator<<(char c);
 
 	Output& output;
 };

@@ -27,9 +27,11 @@ public:
 
 private:
 	File& file;
-	src_charpos_t charpos;
-	src_line_t linenum;
 	std::ifstream in;
+	src_charpos_t charpos, real_charpos;
+	src_line_t linenum;
+	std::string line;
+	std::string::iterator line_it;
 };
 
 } }

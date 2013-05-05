@@ -5,18 +5,36 @@
 namespace dcc { namespace pre {
 
 CharMapper::CharMapper(io::FileReader& in)
-	: ls_has_unget(false), in(in)
+	: ls_has_unget(false)
+	, in(in)
+	, unget_end(unget_buffer + sizeof(unget_buffer) / sizeof(*unget_buffer))
+	, unget_ptr(unget_end)
 {
+}
+
+char CharMapper::charmap()
+{
+	if (unget_ptr != unget_end)
+		return *unget_ptr++;
+	char c;
+	while ((c = in.get()) == '\r')
+		;
+	return c;
+}
+
+void CharMapper::unget(char c)
+{
+	*--unget_ptr = c;
 }
 
 char CharMapper::trigraph()
 {
 	if (settings.trigraph) {
-		char c = in.get();
+		char c = charmap();
 		if (c == '?') {
-			c = in.get();
+			c = charmap();
 			if (c == '?') {
-				c = in.get();
+				c = charmap();
 				switch (c) {
 				case '=': return '#';
 				case '/': return '\\';
@@ -28,9 +46,11 @@ char CharMapper::trigraph()
 				case '>': return '}';
 				case '-': return '~';
 				}
-				in.unget();
+				unget(c);
+				unget('?');
+			} else {
+				unget(c);
 			}
-			in.unget();
 			return '?';
 		} else {
 			return c;

@@ -29,6 +29,7 @@ public:
 	virtual void set_value(std::istream& i) { i >> val; }
 
 	operator T() const { return val; }
+	Setting<T> &operator=(const T& t) { val = t; return *this; }
 
 	T val, init, std;
 };

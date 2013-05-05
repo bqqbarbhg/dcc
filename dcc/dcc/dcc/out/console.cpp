@@ -45,5 +45,9 @@ Console& Console::operator<<(long l)
 {
 	return write_any(*this, l);
 }
+Console& Console::operator<<(char c)
+{
+	return write_any(*this, c);
+}
 
 } }

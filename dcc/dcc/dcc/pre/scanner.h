@@ -26,16 +26,20 @@ private:
 
 	// Get one character from the reader
 	char get();
-	
+
+	dcc::SourceRange get_current_source_range() const;
+
 	std::string buffer;
 	std::unordered_map<StringRef, TokenType> keywords;
 
-	dcc::File file;
+	dcc::File &file;
 	dcc::io::FileReader file_reader;
 	dcc::pre::CharMapper char_mapper;
 
 	src_charpos_t char_pos;
 	StringMap& string_map;
+
+	char last;
 };
 
 } }

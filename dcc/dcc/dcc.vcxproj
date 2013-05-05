@@ -68,6 +68,7 @@
   <ItemGroup>
     <ClInclude Include="dcc\assert.h" />
     <ClInclude Include="dcc\enums.h" />
+    <ClInclude Include="dcc\except.h" />
     <ClInclude Include="dcc\file.h" />
     <ClInclude Include="dcc\front\parser.h" />
     <ClInclude Include="dcc\front\token.h" />
@@ -94,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dcc\assert.cpp" />
+    <ClCompile Include="dcc\except.cpp" />
     <ClCompile Include="dcc\file.cpp" />
     <ClCompile Include="dcc\io.cpp" />
     <ClCompile Include="dcc\out\console\ansi_color_console.cpp" />

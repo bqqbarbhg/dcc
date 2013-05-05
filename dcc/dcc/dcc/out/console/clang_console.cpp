@@ -22,7 +22,7 @@ void ClangConsole::write(const char *s, unsigned int n)
 	for (; s != e; s++) {
 		if (*s == '\n') {
 			flush();
-			std::cout << std::endl;
+			output.write("\n", 1);
 		} else {
 			line += *s;
 			if ((mode != NORMAL || !under.empty()) && !is_utf8_continuation_byte(*s)) {

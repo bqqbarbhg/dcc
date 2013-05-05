@@ -1,6 +1,1 @@
-
-#include <stdio.h>
-
-int main(int λ, char** argv) {
-	printf("Hello, world!\n");
-}
+/* w */ while ebin

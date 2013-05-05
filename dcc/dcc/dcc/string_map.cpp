@@ -3,8 +3,8 @@
 namespace dcc {
 
 StringMap::StringMap()
-	: bucket_count(2048)
-	, page(4096)
+	: page(4096)
+	, bucket_count(2048)
 	, entries(new BaseEntry[bucket_count])
 {
 }
@@ -14,7 +14,7 @@ StringMap::Entry& StringMap::entry_insert(BaseEntry *baseEntry, const char *str,
 	// Return the first entry (fast)
 	if (baseEntry->ptr == nullptr)
 		return *baseEntry;
-	if (baseEntry->len == len && memcmp(str, baseEntry->ptr, len))
+	if (baseEntry->len == len && !memcmp(str, baseEntry->ptr, len))
 		return *baseEntry;
 
 	// If it's the first collision in the bucket create the list
@@ -47,8 +47,10 @@ StringRef StringMap::insert(const char* str)
 	Entry& e = entry_insert(b, str, l);
 
 	// If the entry is empty store the word
-	if (!e.ptr)
+	if (!e.ptr) {
 		e.ptr = page.insert(str, l);
+		e.len = l;
+	}
 
 	// If the word has higher frequency than the fast BaseEntry swap the more
 	// frequent word to be the fast default entry

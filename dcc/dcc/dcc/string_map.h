@@ -69,6 +69,8 @@ private:
 	class Entry
 	{
 	public:
+		Entry() : ptr(nullptr), len(0), count(0) { }
+
 		// Pointer to the stored string
 		const char* ptr;
 
@@ -91,18 +93,12 @@ private:
 	class BaseEntry : public Entry
 	{
 	public:
+		BaseEntry() : entrylistptr(nullptr) { }
 		std::unique_ptr<std::vector<Entry>> entrylistptr;
 	};
 	
 	// Insert (or find) an entry in the bucket
 	Entry& entry_insert(BaseEntry* entry, const char *str, unsigned int len);
-
-
-	// Pointer to `bucket_count` BaseEntries
-	std::unique_ptr<BaseEntry[]> entries;
-
-	// Number of `entries`
-	unsigned int bucket_count;
 
 	// Returns a hash from the string and stores the length of the string in
 	// `len` if not nullptr
@@ -110,6 +106,12 @@ private:
 
 	// The current Page for storing the strings
 	Page page;
+
+	// Number of `entries`
+	unsigned int bucket_count;
+
+	// Pointer to `bucket_count` BaseEntries
+	std::unique_ptr<BaseEntry[]> entries;
 };
 
 }

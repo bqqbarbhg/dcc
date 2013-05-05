@@ -16,11 +16,15 @@ public:
 	char get();
 
 private:
+	char charmap();
 	char trigraph();
 	char linesplice();
+	void unget(char c);
 
 	bool ls_has_unget;
 	char ls_unget;
+
+	char unget_buffer[3], *unget_end, *unget_ptr;
 
 	io::FileReader& in;
 };

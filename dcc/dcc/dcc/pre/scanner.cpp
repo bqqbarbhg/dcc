@@ -2,6 +2,7 @@
 #include <dcc/settings.h>
 #include <dcc/unicode.h>
 #include <dcc/io/file_reader.h>
+#include <dcc/except.h>
 
 namespace dcc { namespace pre {
 
@@ -11,6 +12,7 @@ Scanner::Scanner(File& file, StringMap& strmap)
 	, char_mapper(file_reader)
 	, char_pos(file_reader.get_char_index())
 	, string_map(strmap)
+	, last(0)
 {
 	// Create the keyword lsit
 	static struct {
@@ -35,12 +37,18 @@ Scanner::Scanner(File& file, StringMap& strmap)
 	}
 }
 
+SourceRange Scanner::get_current_source_range() const
+{
+	src_charpos_t next_char_pos = file_reader.get_char_index();
+	return SourceRange(&file, char_pos, next_char_pos);
+}
+
 void Scanner::output_token(TokenType type)
 {
 	token.type = type;
 	token.str = string_map.insert(buffer.c_str());
 	
-	src_charpos_t next_char_pos = file_reader.get_char_index();
+	src_charpos_t next_char_pos = file_reader.get_char_index() - 1;
 	token.range = SourceRange(&file, char_pos, next_char_pos);
 	char_pos = next_char_pos;
 
@@ -49,15 +57,72 @@ void Scanner::output_token(TokenType type)
 
 char Scanner::get()
 {
-	char c = char_mapper.get();
-	buffer += c;
-	return c;
+	if (last)
+		buffer += last;
+	return last = char_mapper.get();
 }
 
 void Scanner::advance()
 {
-	while (get()) ;
-	output_token(IDENTIFIER);
+	if (!last)
+		get();
+
+	char c = last;
+	char lookahead;
+
+	bool hitws = false;
+
+	// Whitespace or comment
+	while (true) {
+		if (c == ' ' || c == '\t' || c == '\n') {
+			c = get();
+			hitws = true;
+		}
+		if (c == '/') {
+			lookahead = get();
+			if (lookahead == '*') {
+				hitws = true;
+				src_charpos_t comment_start = file_reader.get_char_index() - 2;
+				c = get();
+				if (!c)
+					throw BlockCommentNotClosedException(SourceRange(&file, comment_start, comment_start + 2));
+				lookahead = get();
+				while (lookahead && !(c == '*' && lookahead == '/'))
+					c = lookahead, lookahead = get();
+				if (!lookahead)
+					throw BlockCommentNotClosedException(SourceRange(&file, comment_start, comment_start + 2));
+				c = get();
+			}
+			continue;
+		}
+		break;
+	}
+	if (hitws) {
+		output_token(WHITESPACE);
+		return;
+	}
+
+	// End of file
+	if (!c) {
+		output_token(END_OF_FILE);
+		return;
+	}
+
+	// Identifier
+	if (c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c == '_') {
+		do {
+			c = get();
+		} while (c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c == '_' || c >= '0' && c <= '9');
+
+		output_token(IDENTIFIER);
+		auto it = keywords.find(token.str);
+		if (it != keywords.end()) {
+			token.type = it->second;
+		}
+		return;
+	}
+
+	throw UnexpectedCharException(get_current_source_range(), c);
 }
 
 } }
